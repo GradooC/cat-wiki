@@ -93,7 +93,7 @@ const Home: React.FC<Props> = ({ breeds }) => {
                             p={3}
                         >
                             <VStack
-                                overflowY="scroll"
+                                overflowY="auto"
                                 align="start"
                                 sx={{
                                     '&::-webkit-scrollbar': {
@@ -116,6 +116,7 @@ const Home: React.FC<Props> = ({ breeds }) => {
                                             p={3}
                                             key={id}
                                             borderRadius="xl"
+                                            cursor="pointer"
                                             _hover={{ bgColor: 'gray.100' }}
                                         >
                                             <Text fontWeight="semibold">
@@ -160,9 +161,11 @@ const Home: React.FC<Props> = ({ breeds }) => {
                                 .filter((_, index) => index < 6)
                                 .map(({ id, name, image: { url } }) => (
                                     <CatBreedItem
+                                        isFirstItemStyled={true}
                                         key={id}
                                         url={url}
                                         name={name}
+                                        size="md"
                                     />
                                 ))}
                         </Wrap>

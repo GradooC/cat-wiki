@@ -2,40 +2,70 @@ import { Image } from '@chakra-ui/image';
 import { Box, Text, WrapItem } from '@chakra-ui/layout';
 import { Skeleton } from '@chakra-ui/react';
 import { BreedType, CatImageType } from '@dataTypes/breed';
+import { useToken } from '@chakra-ui/react';
 import React from 'react';
 
 type Props = {
-    name?: BreedType['name'];
     url: CatImageType['url'];
+    size?: 'sm' | 'md' | 'lg' | 'xl';
+    name?: BreedType['name'];
+    isFirstItemStyled?: boolean;
 };
 
-export const CatBreedItem: React.FC<Props> = ({ name, url }) => {
+const sizes = [
+    {
+        label: 'sm',
+        size: 44,
+    },
+    {
+        label: 'md',
+        size: 56,
+    },
+    {
+        label: 'lg',
+        size: 72,
+    },
+    {
+        label: 'xl',
+        size: 96,
+    },
+] as const;
+
+export const CatBreedItem: React.FC<Props> = ({
+    name,
+    size = 'sm',
+    url,
+    isFirstItemStyled,
+}) => {
+    const boxSize = sizes.find(({ label }) => label === size).size;
+    const [token4, tokenSize] = useToken('space', [4, boxSize]);
+
     return (
         <WrapItem
             position="relative"
-            zIndex="1"
-            _first={{
-                _before: {
-                    content: '""',
-                    position: 'absolute',
-                    display: 'inline-block',
-                    zIndex: -1,
-                    top: 5,
-                    left: -5,
-                    boxSize: '3xs',
-                    borderRadius: 'xl',
-                    bgColor: 'primary.medium',
-                },
-            }}
+            _first={
+                isFirstItemStyled && {
+                    _before: {
+                        content: '""',
+                        position: 'absolute',
+                        display: 'inline-block',
+                        top: 4,
+                        left: -4,
+                        w: 4,
+                        h: `calc(${tokenSize} - 2 * ${token4})`,
+                        borderLeftRadius: 'xl',
+                        bgColor: 'primary.medium',
+                    },
+                }
+            }
         >
             <Box>
                 <Image
                     src={url}
                     alt={name}
-                    boxSize="2xs"
+                    boxSize={boxSize}
                     borderRadius="2xl"
                     objectFit="cover"
-                    zIndex="2"
                 ></Image>
                 {name && <Text fontWeight="semibold">{name}</Text>}
             </Box>
