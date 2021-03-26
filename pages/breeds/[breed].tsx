@@ -63,6 +63,7 @@ const Breed: React.FC<Props> = ({ breed, images }) => {
                     <VStack align="flex-start" spacing={8}>
                         {characteristics.map((characteristic) => (
                             <Stats
+                                key={characteristic}
                                 statName={characteristic}
                                 statIndex={breed[characteristic]}
                             ></Stats>

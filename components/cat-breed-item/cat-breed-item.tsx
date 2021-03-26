@@ -1,6 +1,5 @@
 import { Image } from '@chakra-ui/image';
 import { Box, Text, WrapItem } from '@chakra-ui/layout';
-import { Skeleton } from '@chakra-ui/react';
 import { BreedType, CatImageType } from '@dataTypes/breed';
 import { useToken } from '@chakra-ui/react';
 import React from 'react';
@@ -67,7 +66,7 @@ export const CatBreedItem: React.FC<Props> = ({
                     borderRadius="2xl"
                     objectFit="cover"
                 ></Image>
-                {name && <Text fontWeight="semibold">{name}</Text>}
+                {name && <Text mt={4} fontWeight="semibold">{name}</Text>}
             </Box>
         </WrapItem>
     );

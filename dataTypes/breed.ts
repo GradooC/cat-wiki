@@ -1,8 +1,9 @@
 export type CatImageType = {
-    id: number;
+    id: string;
     width: number;
     height: number;
     url: string;
+    breeds: BreedType[];
 };
 
 export type BreedType = {
@@ -20,5 +21,6 @@ export type BreedType = {
     health_issues: number;
     social_needs: number;
     stranger_friendly: number;
-    image: CatImageType;
+    reference_image_id: string;
+    image?: CatImageType;
 };

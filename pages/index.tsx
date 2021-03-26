@@ -11,7 +11,6 @@ import {
     Stack,
 } from '@chakra-ui/layout';
 import {
-    Button,
     Flex,
     Icon,
     Image,
@@ -20,6 +19,7 @@ import {
     InputRightElement,
     Popover,
     PopoverContent,
+    Link as ChackraLink
 } from '@chakra-ui/react';
 import { ArrowRightAlt, Search } from '@material-ui/icons';
 import { Page } from '@components/page';
@@ -147,12 +147,14 @@ const Home: React.FC<Props> = ({ breeds }) => {
                             66+ Breeds For you to discover
                         </Heading>
                         <Flex align="flex-end" justify="flex-end" width="50%">
-                            <Flex>
-                                <Text casing="uppercase" fontWeight="bold">
-                                    see more
-                                </Text>
-                                <ArrowRightAlt />
-                            </Flex>
+                            <Link href="/most-searched-breeds">
+                                <Flex cursor="pointer">
+                                    <Text casing="uppercase" fontWeight="bold">
+                                        see more
+                                    </Text>
+                                    <ArrowRightAlt />
+                                </Flex>
+                            </Link>
                         </Flex>
                     </Flex>
                     <Box>
@@ -191,9 +193,11 @@ const Home: React.FC<Props> = ({ breeds }) => {
                             lower your stress and anxiety levels
                         </Text>
                         <Flex>
-                            <Text textTransform="uppercase" fontWeight="bold">
-                                read more
-                            </Text>
+                            <ChackraLink isExternal={true} href="https://cfa.org/">
+                                <Text textTransform="uppercase" fontWeight="bold">
+                                    read more
+                                </Text>
+                            </ChackraLink>
                             <ArrowRightAlt />
                         </Flex>
                     </VStack>

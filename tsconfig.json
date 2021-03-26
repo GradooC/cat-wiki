@@ -23,6 +23,7 @@
         "@icons/*": ["icons/*"],
         "@theme/*": ["theme/*"],
         "@utils/*": ["utils/*"],
+        "@styles/*": ["styles/*"],
         "@dataTypes/*": ["dataTypes/*"],
     }
   },
