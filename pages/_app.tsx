@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { Global } from '@emotion/react';
 import { fonts } from '@styles/font-face';

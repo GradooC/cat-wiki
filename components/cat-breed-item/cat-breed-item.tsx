@@ -1,7 +1,5 @@
-import { Image } from '@chakra-ui/image';
-import { Box, Text, WrapItem } from '@chakra-ui/layout';
 import { BreedType, CatImageType } from '@dataTypes/breed';
-import { useToken } from '@chakra-ui/react';
+import { useToken, Image, Box, Text, WrapItem } from '@chakra-ui/react';
 import React from 'react';
 
 type Props = {
@@ -30,12 +28,7 @@ const sizes = [
     },
 ] as const;
 
-export const CatBreedItem: React.FC<Props> = ({
-    name,
-    size = 'sm',
-    url,
-    isFirstItemStyled,
-}) => {
+export const CatBreedItem: React.FC<Props> = ({ name, size = 'sm', url, isFirstItemStyled }) => {
     const boxSize = sizes.find(({ label }) => label === size).size;
     const [token4, tokenSize] = useToken('space', [4, boxSize]);
 
@@ -65,8 +58,12 @@ export const CatBreedItem: React.FC<Props> = ({
                     boxSize={boxSize}
                     borderRadius="2xl"
                     objectFit="cover"
-                ></Image>
-                {name && <Text mt={4} fontWeight="semibold">{name}</Text>}
+                />
+                {name && (
+                    <Text mt={4} fontWeight="semibold">
+                        {name}
+                    </Text>
+                )}
             </Box>
         </WrapItem>
     );

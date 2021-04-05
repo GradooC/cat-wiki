@@ -1,16 +1,6 @@
 import React, { ChangeEventHandler, useState } from 'react';
 import Link from 'next/link';
 import {
-    Box,
-    GridItem,
-    Heading,
-    Text,
-    VStack,
-    Wrap,
-    Grid,
-    Stack,
-} from '@chakra-ui/layout';
-import {
     Flex,
     Icon,
     Image,
@@ -19,7 +9,15 @@ import {
     InputRightElement,
     Popover,
     PopoverContent,
-    Link as ChackraLink
+    Link as ChackraLink,
+    Box,
+    GridItem,
+    Heading,
+    Text,
+    VStack,
+    Wrap,
+    Grid,
+    Stack,
 } from '@chakra-ui/react';
 import { ArrowRightAlt, Search } from '@material-ui/icons';
 import { Page } from '@components/page';
@@ -50,27 +48,11 @@ const Home: React.FC<Props> = ({ breeds }) => {
     return (
         <Page>
             <section style={{ position: 'relative' }}>
-                <Image
-                    src="/HeroImagelg.png"
-                    alt="main cat image"
-                    borderTopRadius="4xl"
-                />
-                <Box
-                    position="absolute"
-                    top="20%"
-                    left={20}
-                    w="35%"
-                    color="white"
-                >
+                <Image src="/HeroImagelg.png" alt="main cat image" borderTopRadius="4xl" />
+                <Box position="absolute" top="20%" left={20} w="35%" color="white">
                     <LogoIcon w="80%" />
-                    <Text fontSize="2xl">
-                        Get to know more about your cat breed
-                    </Text>
-                    <InputGroup
-                        size="lg"
-                        color="gray.800"
-                        mt={{ base: 10, xl: 20 }}
-                    >
+                    <Text fontSize="2xl">Get to know more about your cat breed</Text>
+                    <InputGroup size="lg" color="gray.800" mt={{ base: 10, xl: 20 }}>
                         <Input
                             bgColor="white"
                             borderRadius="full"
@@ -79,19 +61,12 @@ const Home: React.FC<Props> = ({ breeds }) => {
                             onChange={handleChange}
                             value={value}
                         />
-                        <InputRightElement children={<Icon as={Search} />} />
+                        <InputRightElement>
+                            <Icon as={Search} />
+                        </InputRightElement>
                     </InputGroup>
-                    <Popover
-                        isOpen={!isEmpty(foundBreeds) && !isEmpty(value)}
-                        autoFocus={false}
-                    >
-                        <PopoverContent
-                            color="gray.800"
-                            borderRadius="3xl"
-                            mt={5}
-                            maxH={60}
-                            p={3}
-                        >
+                    <Popover isOpen={!isEmpty(foundBreeds) && !isEmpty(value)} autoFocus={false}>
+                        <PopoverContent color="gray.800" borderRadius="3xl" mt={5} maxH={60} p={3}>
                             <VStack
                                 overflowY="auto"
                                 align="start"
@@ -119,9 +94,7 @@ const Home: React.FC<Props> = ({ breeds }) => {
                                             cursor="pointer"
                                             _hover={{ bgColor: 'gray.100' }}
                                         >
-                                            <Text fontWeight="semibold">
-                                                {name}
-                                            </Text>
+                                            <Text fontWeight="semibold">{name}</Text>
                                         </Box>
                                     </Link>
                                 ))}
@@ -131,16 +104,10 @@ const Home: React.FC<Props> = ({ breeds }) => {
                 </Box>
             </section>
             <section>
-                <Box
-                    px={20}
-                    pt={10}
-                    pb={20}
-                    bgColor="primary.light"
-                    borderBottomRadius="4xl"
-                >
+                <Box px={20} pt={10} pb={20} bgColor="primary.light" borderBottomRadius="4xl">
                     <Box mb={15}>
                         <Text fontSize="18px">Most Searched Breeds</Text>
-                        <Box borderTop="2px" width="6xs"></Box>
+                        <Box borderTop="2px" width="6xs" />
                     </Box>
                     <Flex pb={10}>
                         <Heading fontSize="48px" width="50%">
@@ -163,7 +130,7 @@ const Home: React.FC<Props> = ({ breeds }) => {
                                 .filter((_, index) => index < 6)
                                 .map(({ id, name, image: { url } }) => (
                                     <CatBreedItem
-                                        isFirstItemStyled={true}
+                                        isFirstItemStyled
                                         key={id}
                                         url={url}
                                         name={name}
@@ -183,17 +150,16 @@ const Home: React.FC<Props> = ({ breeds }) => {
                     justify="center"
                 >
                     <VStack align="flex-start">
-                        <Box borderTop="2px" width="6xs"></Box>
+                        <Box borderTop="2px" width="6xs" />
                         <Heading size="4xl" mb={10}>
                             Why should you have a cat?
                         </Heading>
                         <Text mb={10}>
-                            Having a cat around you can actually trigger the
-                            release of calming chemicals in your body which
-                            lower your stress and anxiety levels
+                            Having a cat around you can actually trigger the release of calming
+                            chemicals in your body which lower your stress and anxiety levels
                         </Text>
                         <Flex>
-                            <ChackraLink isExternal={true} href="https://cfa.org/">
+                            <ChackraLink isExternal href="https://cfa.org/">
                                 <Text textTransform="uppercase" fontWeight="bold">
                                     read more
                                 </Text>
@@ -208,23 +174,23 @@ const Home: React.FC<Props> = ({ breeds }) => {
                         gridTemplateRows="1.6fr 1.8fr 1fr"
                     >
                         <GridItem colSpan={2}>
-                            <Image src="/image 2.png"></Image>
+                            <Image src="/image 2.png" />
                         </GridItem>
                         <GridItem rowSpan={2}>
-                            <Image src="/image 3.png"></Image>
+                            <Image src="/image 3.png" />
                         </GridItem>
                         <GridItem colStart={2} rowSpan={2}>
-                            <Image src="/image 1.png"></Image>
+                            <Image src="/image 1.png" />
                         </GridItem>
                     </Grid>
                 </Stack>
             </section>
-            <section></section>
+            <section />
         </Page>
     );
 };
 
-export const getStaticProps: GetStaticProps<Props> = async (context) => {
+export const getStaticProps: GetStaticProps<Props> = async () => {
     const breeds = await api.getAllBreeds();
 
     return {

@@ -1,1 +1,1 @@
-export {TopBreed} from './top-breeds'
+export { TopBreed } from './top-breeds';

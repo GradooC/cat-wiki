@@ -1,6 +1,6 @@
-import { Box, Heading, HStack, Text, VStack } from '@chakra-ui/layout';
+import { Box, Heading, HStack, Text, VStack } from '@chakra-ui/react';
 import { CatBreedItem } from '@components/cat-breed-item';
-import { BreedType, CatImageType } from '@dataTypes/breed';
+import { CatImageType } from '@dataTypes/breed';
 import React from 'react';
 
 type Props = {
@@ -13,7 +13,7 @@ export const TopBreeds: React.FC<Props> = ({ images }) => {
             {images.map(({ url, id, breeds }, index) => (
                 <HStack key={id} align="start">
                     <Box mr={12} minW={44}>
-                        <CatBreedItem url={url}></CatBreedItem>
+                        <CatBreedItem url={url} />
                     </Box>
                     <Box>
                         <Heading mb={6} fontWeight="semibold">{`${index + 1}. ${

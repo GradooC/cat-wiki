@@ -1,12 +1,4 @@
-import {
-    Box,
-    Flex,
-    Heading,
-    Text,
-    VStack,
-    Wrap,
-    WrapItem,
-} from '@chakra-ui/layout';
+import { Box, Flex, Heading, Text, VStack, Wrap } from '@chakra-ui/react';
 import { CatBreedItem } from '@components/cat-breed-item';
 import { Page } from '@components/page';
 import { Stats } from '@components/stats';
@@ -33,17 +25,14 @@ const characteristics = [
 ];
 
 const Breed: React.FC<Props> = ({ breed, images }) => {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const { name, description, temperament, origin, life_span } = breed;
     const [mainImage, ...otherImages] = images;
     return (
         <Page>
             <Flex mb={10}>
                 <Box width="35%" mr={10}>
-                    <CatBreedItem
-                        size="xl"
-                        url={mainImage.url}
-                        isFirstItemStyled={true}
-                    ></CatBreedItem>
+                    <CatBreedItem size="xl" url={mainImage.url} isFirstItemStyled />
                 </Box>
                 <VStack align="flex-start" width="65%" spacing={6}>
                     <Heading>{name}</Heading>
@@ -66,7 +55,7 @@ const Breed: React.FC<Props> = ({ breed, images }) => {
                                 key={characteristic}
                                 statName={characteristic}
                                 statIndex={breed[characteristic]}
-                            ></Stats>
+                            />
                         ))}
                     </VStack>
                 </VStack>
@@ -74,16 +63,14 @@ const Breed: React.FC<Props> = ({ breed, images }) => {
             <Heading mb={20}>Other photos</Heading>
             <Wrap spacing={12} justify="center" mb={44}>
                 {otherImages.map(({ url }) => (
-                    <CatBreedItem url={url} size="lg"></CatBreedItem>
+                    <CatBreedItem url={url} size="lg" />
                 ))}
             </Wrap>
         </Page>
     );
 };
 
-export const getStaticProps: GetStaticProps<Props> = async ({
-    params: { breed },
-}) => {
+export const getStaticProps: GetStaticProps<Props> = async ({ params: { breed } }) => {
     const breedName = (breed as string).replace('-', ' ');
     const [currentBreed]: BreedType[] = await api.searchBreeds({
         q: breedName,

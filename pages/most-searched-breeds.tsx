@@ -1,7 +1,7 @@
-import { Heading } from '@chakra-ui/layout';
+import { Heading } from '@chakra-ui/react';
 import { Page } from '@components/page';
 import { TopBreeds } from '@components/top-breed/top-breeds';
-import { BreedType, CatImageType } from '@dataTypes/breed';
+import { CatImageType } from '@dataTypes/breed';
 import { api } from '@utils/api';
 import { GetStaticProps } from 'next';
 import React from 'react';
@@ -27,12 +27,12 @@ const MostSearchedBreeds: React.FC<Props> = ({ images }) => {
     return (
         <Page>
             <Heading fontWeight="extrabold">Top 10 most searched breeds</Heading>
-            <TopBreeds images={images}></TopBreeds>
+            <TopBreeds images={images} />
         </Page>
     );
 };
 
-export const getStaticProps: GetStaticProps<Props> = async (context) => {
+export const getStaticProps: GetStaticProps<Props> = async () => {
     const images = await api.getBreedsByNames(topBreeds);
 
     return {
