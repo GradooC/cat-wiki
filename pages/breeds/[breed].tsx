@@ -4,6 +4,7 @@ import { Page } from '@components/page';
 import { Stats } from '@components/stats';
 import { BreedType, CatImageType } from '@dataTypes/breed';
 import { api } from '@utils/api';
+import { toName } from '@utils/toName';
 import { toPath } from '@utils/toPath';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import React from 'react';
@@ -62,8 +63,8 @@ const Breed: React.FC<Props> = ({ breed, images }) => {
             </Flex>
             <Heading mb={20}>Other photos</Heading>
             <Wrap spacing={12} justify="center" mb={44}>
-                {otherImages.map(({ url }) => (
-                    <CatBreedItem url={url} size="lg" />
+                {otherImages.map(({ url, id }) => (
+                    <CatBreedItem key={id} url={url} size="lg" />
                 ))}
             </Wrap>
         </Page>
@@ -71,7 +72,7 @@ const Breed: React.FC<Props> = ({ breed, images }) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params: { breed } }) => {
-    const breedName = (breed as string).replace('-', ' ');
+    const breedName = toName(breed);
     const [currentBreed]: BreedType[] = await api.searchBreeds({
         q: breedName,
     });
